@@ -1,7 +1,7 @@
 #![no_std] // <-- see that attr? no shit!
 #![cfg_attr(docsrs, feature(doc_cfg))]
-#![cfg_attr(feature = "cons", doc = include_str!("../README.md"))]
-#![cfg_attr(not(feature = "cons"), doc = "(no docs here)")]
+#![cfg_attr(any(docsrs, feature = "cons"), doc = include_str!("../README.md"))]
+#![cfg_attr(not(any(docsrs, feature = "cons")), doc = "(no docs here)")]
 
 use core::borrow::Borrow;
 
@@ -80,18 +80,23 @@ pub trait StackedSet: Sized {
 }
 
 #[cfg(feature = "cons")]
+#[cfg_attr(docsrs, doc(cfg(feature = "cons")))]
 pub use cons::ConsSet as StackCons;
 
 #[cfg(feature = "collection")]
+#[cfg_attr(docsrs, doc(cfg(feature = "collection")))]
 pub use collection::SetCollection;
 
 #[cfg(feature = "alloc-vec")]
+#[cfg_attr(docsrs, doc(cfg(feature = "alloc-vec")))]
 pub use alloc_vec::Vec as AllocVec;
 
 #[cfg(feature = "alloc-tree")]
+#[cfg_attr(docsrs, doc(cfg(feature = "alloc-tree")))]
 pub use alloc_tree::TreeSet as AllocTree;
 
 #[cfg(feature = "std-hash")]
+#[cfg_attr(docsrs, doc(cfg(feature = "std-hash")))]
 pub use std_hash::Hash as StdHash;
 
 #[cfg(test)]

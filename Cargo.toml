@@ -35,6 +35,11 @@ name = "std_hash"
 harness = false
 required-features = ["std-hash"]
 
+# source: https://stackoverflow.com/a/61417700
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs", "--document-private-items", "--no-deps", "--all-features"]
+
 [lints.rust]
 rust_2018_idioms = { level = "deny", priority = -1 }
 missing_debug_implementations = "deny"
