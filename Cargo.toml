@@ -1,0 +1,23 @@
+[package]
+name = "stacked-set"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[dev-dependencies]
+
+[features]
+
+[lints.rust]
+rust_2018_idioms = { level = "deny", priority = -1 }
+missing_debug_implementations = "deny"
+missing_docs = "deny"
+unsafe_code = "forbid"
+
+[lints.rustdoc]
+broken_intra_doc_links = "forbid"
+
+[lints.clippy]
+module_name_repetitions = "allow"
+
