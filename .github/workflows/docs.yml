@@ -40,7 +40,7 @@ jobs:
             done
       - name: Generate index.html file
         run: |
-            echo "<meta http-equiv=refresh content=0;url=stacked-set/index.html>" > target/doc/index.html
+            echo "<meta http-equiv=refresh content=0;url=stacked_set/index.html>" > target/doc/index.html
 
       - name: Upload documentation
         if: ${{ !env.ACT }}
