@@ -12,6 +12,7 @@ criterion = "0.5.1"
 cons = []
 collection = []
 alloc-vec = ["collection"]
+alloc-tree = ["collection"]
 
 [[bench]]
 name = "cons"
@@ -21,6 +22,11 @@ harness = false
 name = "alloc_vec"
 harness = false
 required-features = ["alloc-vec"]
+
+[[bench]]
+name = "alloc_tree"
+harness = false
+required-features = ["alloc-tree"]
 
 [lints.rust]
 rust_2018_idioms = { level = "deny", priority = -1 }

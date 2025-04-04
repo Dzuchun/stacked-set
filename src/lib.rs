@@ -3,7 +3,7 @@
 
 use core::borrow::Borrow;
 
-#[cfg(feature = "alloc-vec")]
+#[cfg(any(feature = "alloc-vec", feature = "alloc-tree"))]
 extern crate alloc;
 
 #[cfg(feature = "collection")]
@@ -17,6 +17,11 @@ mod cons;
 #[cfg(feature = "alloc-vec")]
 #[doc(hidden)]
 mod alloc_vec;
+
+#[cfg(feature = "alloc-tree")]
+#[doc(hidden)]
+mod alloc_tree;
+
 /// Common trait for stacked set implementations. Users are intended to define their input as `impl StackedSet<Item = WhateverItemTheyNeed>`, so it's up to the user to pick the implementation
 pub trait StackedSet: Sized {
     /// Item stored in the set
@@ -65,6 +70,9 @@ pub use collection::SetCollection;
 
 #[cfg(feature = "alloc-vec")]
 pub use alloc_vec::Vec as AllocVec;
+
+#[cfg(feature = "alloc-tree")]
+pub use alloc_tree::TreeSet as AllocTree;
 
 #[cfg(test)]
 mod tests;

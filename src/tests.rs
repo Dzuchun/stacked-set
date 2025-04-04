@@ -135,3 +135,6 @@ test_impl!(cons, crate::StackCons<'static, TypeId>);
 
 #[cfg(feature = "alloc-vec")]
 test_impl!(alloc_vec, crate::AllocVec<'static, TypeId>);
+
+#[cfg(feature = "alloc-tree")]
+test_impl!(alloc_tree, crate::AllocTree<'static, TypeId>);
