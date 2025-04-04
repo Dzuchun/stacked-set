@@ -48,3 +48,6 @@ pub trait StackedSet: Sized {
 
 #[cfg(feature = "cons")]
 pub use cons::ConsSet as StackCons;
+
+#[cfg(test)]
+mod tests;

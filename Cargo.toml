@@ -6,9 +6,14 @@ edition = "2024"
 [dependencies]
 
 [dev-dependencies]
+criterion = "0.5.1"
 
 [features]
 cons = []
+
+[[bench]]
+name = "cons"
+harness = false
 
 [lints.rust]
 rust_2018_idioms = { level = "deny", priority = -1 }
