@@ -3,6 +3,9 @@
 
 use core::borrow::Borrow;
 
+#[cfg(feature = "cons")]
+#[doc(hidden)]
+mod cons;
 /// Common trait for stacked set implementations. Users are intended to define their input as `impl StackedSet<Item = WhateverItemTheyNeed>`, so it's up to the user to pick the implementation
 pub trait StackedSet: Sized {
     /// Item stored in the set
@@ -42,3 +45,6 @@ pub trait StackedSet: Sized {
     #[must_use = "Despite requiring exclusive borrow, original set is should not be expected to change. Check documentation for more details."]
     fn fork(&mut self) -> Self::Shorten<'_>;
 }
+
+#[cfg(feature = "cons")]
+pub use cons::ConsSet as StackCons;
