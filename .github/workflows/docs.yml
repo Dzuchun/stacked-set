@@ -29,7 +29,7 @@ jobs:
         with:
           command: doc
           toolchain: nightly
-          # args: --no-deps --all-features --document-private-items
+          args: --no-deps --all-features --document-private-items
 
       - name: Fix file permissions
         shell: sh
