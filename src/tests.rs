@@ -138,3 +138,6 @@ test_impl!(alloc_vec, crate::AllocVec<'static, TypeId>);
 
 #[cfg(feature = "alloc-tree")]
 test_impl!(alloc_tree, crate::AllocTree<'static, TypeId>);
+
+#[cfg(feature = "std-hash")]
+test_impl!(std_hash, crate::StdHash<'static, TypeId>);

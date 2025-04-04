@@ -3,6 +3,9 @@
 
 use core::borrow::Borrow;
 
+#[cfg(feature = "std-hash")]
+extern crate std;
+
 #[cfg(any(feature = "alloc-vec", feature = "alloc-tree"))]
 extern crate alloc;
 
@@ -21,6 +24,10 @@ mod alloc_vec;
 #[cfg(feature = "alloc-tree")]
 #[doc(hidden)]
 mod alloc_tree;
+
+#[cfg(feature = "std-hash")]
+#[doc(hidden)]
+mod std_hash;
 
 /// Common trait for stacked set implementations. Users are intended to define their input as `impl StackedSet<Item = WhateverItemTheyNeed>`, so it's up to the user to pick the implementation
 pub trait StackedSet: Sized {
@@ -73,6 +80,9 @@ pub use alloc_vec::Vec as AllocVec;
 
 #[cfg(feature = "alloc-tree")]
 pub use alloc_tree::TreeSet as AllocTree;
+
+#[cfg(feature = "std-hash")]
+pub use std_hash::Hash as StdHash;
 
 #[cfg(test)]
 mod tests;
