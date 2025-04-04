@@ -2,6 +2,15 @@
 name = "stacked-set"
 version = "0.1.0"
 edition = "2024"
+authors = ["Diachenko Artem", "Artem 34ty804krytp92e239eku@gmail.com"]
+description = "Set interface, allowing stack-only implementations"
+documentation = "https://dzuchun.github.io/stacked-set/stacked-set/index.html"
+readme = "README.md"
+repository = "https://github.com/Dzuchun/stacked-set"
+license = "LGPL-3.0-or-later"
+keywords = []
+categories = []
+exclude = ["benches", "tests", ".github", ".gitignore"]
 
 [dependencies]
 
