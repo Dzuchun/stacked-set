@@ -132,3 +132,6 @@ macro_rules! test_impl {
 
 #[cfg(feature = "cons")]
 test_impl!(cons, crate::StackCons<'static, TypeId>);
+
+#[cfg(feature = "alloc-vec")]
+test_impl!(alloc_vec, crate::AllocVec<'static, TypeId>);
