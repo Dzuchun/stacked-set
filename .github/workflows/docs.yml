@@ -27,8 +27,9 @@ jobs:
         env:
           RUSTDOCFLAGS: --cfg docsrs
         with:
-            command: doc
-            # args: --no-deps --all-features --document-private-items
+          command: doc
+          toolchain: nightly
+          # args: --no-deps --all-features --document-private-items
 
       - name: Fix file permissions
         shell: sh
