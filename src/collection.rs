@@ -29,6 +29,14 @@ pub trait SetCollection {
 
     /// Removes an element from the collection represented by [`SetCollection::ExtendMemory`] instance.
     fn remove(&mut self, present_item: Self::ExtendMemory);
+
+    /// Type of iterator over item references.
+    type IntoIter<'i>: Iterator<Item = &'i Self::Item>
+    where
+        Self: 'i;
+
+    /// Creates iterator over item references.
+    fn iter(&self) -> Self::IntoIter<'_>;
 }
 
 /// [`SetCollection`]-based implementation.
@@ -131,5 +139,16 @@ impl<Collection: SetCollection> StackedSet for CollectionSet<'_, Collection> {
     #[inline]
     fn fork(&mut self) -> Self::Shorten<'_> {
         CollectionSet(CollectionRepr::Fork(self.c_mut()))
+    }
+
+    type IntoIter<'i>
+        = Collection::IntoIter<'i>
+    where
+        Self: 'i;
+
+    #[inline]
+    fn iter(&self) -> Self::IntoIter<'_> {
+        let c: &Collection = self;
+        c.iter()
     }
 }

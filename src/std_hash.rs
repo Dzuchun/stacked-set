@@ -35,4 +35,14 @@ impl<Item: Clone + Eq + std::hash::Hash, S: BuildHasher + Default> SetCollection
     fn remove(&mut self, present_item: Self::ExtendMemory) {
         std::collections::HashSet::remove(self, &present_item);
     }
+
+    type IntoIter<'i>
+        = std::collections::hash_set::Iter<'i, Item>
+    where
+        Self: 'i;
+
+    #[inline]
+    fn iter(&self) -> Self::IntoIter<'_> {
+        std::collections::HashSet::iter(self)
+    }
 }

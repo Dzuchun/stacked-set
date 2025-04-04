@@ -38,4 +38,14 @@ impl<Item: Ord + PartialEq + Clone> SetCollection for BTreeSet<Item> {
     fn remove(&mut self, present_item: Self::ExtendMemory) {
         alloc::collections::BTreeSet::remove(self, &present_item);
     }
+
+    type IntoIter<'i>
+        = alloc::collections::btree_set::Iter<'i, Item>
+    where
+        Self: 'i;
+
+    #[inline]
+    fn iter(&self) -> Self::IntoIter<'_> {
+        alloc::collections::BTreeSet::iter(self)
+    }
 }

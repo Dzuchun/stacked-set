@@ -67,6 +67,14 @@ pub trait StackedSet: Sized {
     /// Intended to be used, when you need to pass [`StackedSet`] implementor into multiple inner calls, while retaining ownership of the original one
     #[must_use = "Despite requiring exclusive borrow, original set is should not be expected to change. Check documentation for more details."]
     fn fork(&mut self) -> Self::Shorten<'_>;
+
+    /// Iterator type for the set
+    type IntoIter<'i>: Iterator<Item = &'i Self::Item> + 'i
+    where
+        Self: 'i;
+
+    /// Returns iterator over the set, no specific order guaranteed
+    fn iter(&self) -> Self::IntoIter<'_>;
 }
 
 #[cfg(feature = "cons")]

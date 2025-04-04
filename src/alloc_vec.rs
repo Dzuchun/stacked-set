@@ -29,4 +29,14 @@ impl<Item: PartialEq> SetCollection for alloc::vec::Vec<Item> {
     fn remove(&mut self, _present_item: Self::ExtendMemory) {
         let _ = self.pop();
     }
+
+    type IntoIter<'i>
+        = core::slice::Iter<'i, Item>
+    where
+        Self: 'i;
+
+    #[inline]
+    fn iter(&self) -> Self::IntoIter<'_> {
+        <[Item]>::iter(self)
+    }
 }
