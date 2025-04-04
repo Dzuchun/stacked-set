@@ -9,6 +9,7 @@ edition = "2024"
 criterion = "0.5.1"
 
 [features]
+default = ["cons"]
 cons = []
 collection = []
 alloc-vec = ["collection"]
