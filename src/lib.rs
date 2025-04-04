@@ -1,5 +1,7 @@
 #![no_std] // <-- see that attr? no shit!
-#![doc = include_str!("../README.md")]
+#![cfg_attr(docsrs, feature(doc_cfg))]
+#![cfg_attr(feature = "cons", doc = include_str!("../README.md"))]
+#![cfg_attr(not(feature = "cons"), doc = "(no docs here)")]
 
 use core::borrow::Borrow;
 
