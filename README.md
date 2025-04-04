@@ -71,7 +71,7 @@ set.contains(42);
 
 This happens, because internally `with_1` is thought to contain an exclusive borrow of `set`.
 
-This part of design has nothing to do with stack-only implementation, but allows implementations with normal kind of collections, like `Vec` (see [Collection trait](#SetCollection%20trait) below)
+This part of design has nothing to do with stack-only implementation, but allows implementations with normal kind of collections, like `Vec` (see [Collection trait](#setcollection-trait) below)
 
 To remove 1 from the set, drop `with_1` handle:
 
@@ -170,9 +170,9 @@ nested(set, 10);
 
 ## `SetCollection` trait
 
-`collection` trait locks the [`SetCollection`] trait, simplified version:
-
+`collection` feature locks the `SetCollection` trait:
 ```rust,ignore
+(simplified)
 pub trait SetCollection {
     type ExtendMemory;
     fn new() -> Self;
@@ -182,12 +182,12 @@ pub trait SetCollection {
 }
 ```
 
-Note that this trait can be pretty easily implemented for normal kind of collection, like `Vec` or `HashSet`, an that's exactly what they implement, actually. User is not intended to use this trait directly. Instead, use [`CollectionSet`] wrapper to convert `Vec`, `BTreeSet` or `HashSet` into [`StackedSet`] implementation. Exported variants of [`CollectionSet`] can be found in this crate.
+Note that this trait can be pretty easily implemented for normal kind of collection, like `Vec` or `HashSet`, an that's exactly what they implement, actually. User is not intended to use this trait directly. Instead, use `CollectionSet` wrapper to convert `Vec`, `BTreeSet` or `HashSet` into `StackedSet` implementation. Exported variants of `CollectionSet` can be found in this crate.
 
 ## `StackedSet` trait
 
 If `StackedSet` need to be implemented, here's a bit of explanation on `Shorten`:
-Stacked sets are intended to borrow other instances of their type, but technically shorter lifetime makes it a different type. There's no good way to represent that, so in case of this trait, it's defined as [`CollectionSet::Shorten`]. Basically, `Shorten` should be assigned a `Self` type, but with a lifetime provided by associated type definition.
+Stacked sets are intended to borrow other instances of their type, but technically shorter lifetime makes it a different type. There's no good way to represent that, so in case of this trait, it's defined as `CollectionSet::Shorten`. Basically, `Shorten` should be assigned a `Self` type, but with a lifetime provided by associated type definition.
 
 Another thing to keep in mind is that `&mut T` is *invariant* over lifetime, so some sort of type surgery is usually required during implementation.
 

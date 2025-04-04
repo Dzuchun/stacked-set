@@ -1,7 +1,10 @@
 #![no_std] // <-- see that attr? no shit!
 #![cfg_attr(docsrs, feature(doc_cfg))]
-#![cfg_attr(any(docsrs, feature = "cons"), doc = include_str!("../README.md"))]
-#![cfg_attr(not(any(docsrs, feature = "cons")), doc = "(no docs here)")]
+#![cfg_attr(any(docsrs, all(feature = "cons", feature = "collection")), doc = include_str!("../README.md"))]
+#![cfg_attr(
+    not(any(docsrs, all(feature = "cons", feature = "collection"))),
+    doc = "(no docs here)"
+)]
 
 use core::borrow::Borrow;
 
@@ -11,9 +14,10 @@ extern crate std;
 #[cfg(any(feature = "alloc-vec", feature = "alloc-tree"))]
 extern crate alloc;
 
+/// Defines implementation of [`StackedSet`] based on normal kind of collection.
 #[cfg(feature = "collection")]
-#[doc(hidden)]
-mod collection;
+#[cfg_attr(docsrs, doc(cfg(feature = "collection")))]
+pub mod collection;
 
 #[cfg(feature = "cons")]
 #[doc(hidden)]
@@ -82,10 +86,6 @@ pub trait StackedSet: Sized {
 #[cfg(feature = "cons")]
 #[cfg_attr(docsrs, doc(cfg(feature = "cons")))]
 pub use cons::ConsSet as StackCons;
-
-#[cfg(feature = "collection")]
-#[cfg_attr(docsrs, doc(cfg(feature = "collection")))]
-pub use collection::SetCollection;
 
 #[cfg(feature = "alloc-vec")]
 #[cfg_attr(docsrs, doc(cfg(feature = "alloc-vec")))]
