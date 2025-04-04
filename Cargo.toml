@@ -10,6 +10,7 @@ criterion = "0.5.1"
 
 [features]
 cons = []
+collection = []
 
 [[bench]]
 name = "cons"

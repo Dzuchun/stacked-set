@@ -3,6 +3,10 @@
 
 use core::borrow::Borrow;
 
+#[cfg(feature = "collection")]
+#[doc(hidden)]
+mod collection;
+
 #[cfg(feature = "cons")]
 #[doc(hidden)]
 mod cons;
@@ -48,6 +52,9 @@ pub trait StackedSet: Sized {
 
 #[cfg(feature = "cons")]
 pub use cons::ConsSet as StackCons;
+
+#[cfg(feature = "collection")]
+pub use collection::SetCollection;
 
 #[cfg(test)]
 mod tests;
